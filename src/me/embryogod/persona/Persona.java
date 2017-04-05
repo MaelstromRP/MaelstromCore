@@ -38,7 +38,11 @@ public class Persona {
 		bioBuilder.append(" " + bio);
 		this.bio = bioBuilder.toString();
 	}
-
+	
+	public void clearBio() {
+		this.bio = "";
+	}
+	
 	public String getBio() {
 		return this.bio;
 	}
