@@ -1,8 +1,12 @@
 package me.embryogod.persona;
 
+import java.io.File;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import me.embryogod.core.MaelstromCore;
@@ -65,6 +69,24 @@ public class PersonaCommands implements CommandExecutor {
 			} else if (args[0].equalsIgnoreCase("create")) {
 				// This will clear the player's current persona and start the process anew
 				// For admins, this will be part of the whitelisting process
+				
+				if (player != null) {
+					
+					if (player.hasPermission("player.create.admin")) {
+						
+						if (!(new File(pl.getDataFolder() + "/" + args[1] + "/data.yml").exists())) {
+							File personaFile = new File(pl.getDataFolder() + "/" + args[1] + "/persona.yml");
+							FileConfiguration personaConfig = YamlConfiguration.loadConfiguration(personaFile);
+							personaConfig.set("persona_one.isActivePersona", true);
+							personaConfig.set("persona_one.name", args[2]);
+						}
+						
+					}
+					
+				} else {
+					
+				}
+				
 			}
 			
 		}
